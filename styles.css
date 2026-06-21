@@ -1,0 +1,182 @@
+:root {
+  --ku-crimson: #8B0029;
+  --ku-bg: #8B0029;
+  --ku-text: #333333;
+}
+
+body {
+  font-family: 'Pretendard', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+  background-color: var(--ku-bg);
+  color: var(--ku-text);
+  margin: 0;
+  padding: 0;
+}
+
+/* 3과목 입력을 위한 묶음 스타일 */
+.course-group {
+  background: #f8f9fa;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  border: 1px solid #eee;
+}
+.course-group .form-group {
+  margin-bottom: 12px;
+}
+.course-group input {
+  padding: 10px 12px;
+}
+
+/* 참여자 수 표시 UI */
+.participant-counter {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: white;
+  color: var(--ku-crimson);
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  z-index: 1000;
+  border: 2px solid var(--ku-crimson);
+}
+
+/* 설정 버튼 UI */
+.settings-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color: white;
+  color: var(--ku-crimson);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: transform 0.3s ease, background-color 0.2s;
+}
+
+.settings-btn:hover {
+  background-color: #f1f1f1;
+  transform: rotate(45deg) scale(1.1);
+}
+
+.container {
+  max-width: 500px;
+  margin: 70px auto 40px auto; 
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  border-top: none;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+header h1 {
+  color: var(--ku-crimson);
+  font-size: 2rem;
+  margin: 0 0 10px 0;
+  letter-spacing: -1px;
+}
+
+header h2 {
+  font-size: 1.3rem;
+  margin: 0 0 15px 0;
+  color: #222;
+}
+
+header p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--ku-crimson);
+  box-shadow: 0 0 0 3px rgba(139, 0, 41, 0.1);
+  outline: none;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--ku-crimson);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #6B001F;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 35px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.modal-content h3 {
+  color: var(--ku-crimson);
+  margin-top: 0;
+  font-size: 1.4rem;
+}

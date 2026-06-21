@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>고려대학교 수강 희망 과목 파악 조사</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- 참여자 수 표시 (왼쪽 상단 고정) -->
+  <div class="participant-counter">
+    👥 누적 참여자: <span id="participantCount">0</span>명
+  </div>
+
+  <!-- 시작 시 안내 팝업 -->
+  <div id="introModal" class="modal">
+    <div class="modal-content">
+      <h3 style="margin-bottom: 20px;">설문 목적 안내</h3>
+      <div style="text-align: left; background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; line-height: 1.6; color: #444; font-size: 0.95rem;">
+        본 조사는 수강신청 전 학생들이 원하는 과목과 분반의 규모를 선제적으로 파악하여, <strong>수요에 맞춘 효율적인 학사 행정 계획(분반 개설, 강의실 배정 등)을 수립</strong>하기 위함입니다.
+        <br><br>안정적이고 원활한 교육 환경을 조성하고자 하오니 학생 여러분의 적극적인 참여를 부탁드립니다!
+      </div>
+      <button id="startBtn" class="submit-btn">설문 시작하기</button>
+    </div>
+  </div>
+
+  <div class="container" style="max-width: 550px;">
+    <header id="mainHeader">
+      <h1>고려대학교</h1>
+      <h2>수강 희망 과목 파악 조사</h2>
+      <p id="headerDesc">원활한 수강신청 및 분반 조정을 위해 아래 정보를 정확하게 입력해 주세요.</p>
+    </header>
+
+    <main>
+      <form id="surveyForm">
+        
+        <!-- STEP 1: 학생 기본 정보 -->
+        <div id="step1" class="step">
+          <div class="form-group">
+            <label for="name">학생 이름</label>
+            <input type="text" id="name" name="name" required placeholder="예) 홍길동">
+          </div>
+
+          <div class="form-group">
+            <label for="personnel">학번</label>
+            <input type="number" id="personnel" name="personnel" required placeholder="예) 2024120000">
+          </div>
+
+          <div class="form-group">
+            <label for="department">소속 학과</label>
+            <input type="text" id="department" name="department" required placeholder="예) 컴퓨터학과">
+          </div>
+
+          <button type="button" id="nextBtn1" class="submit-btn">다음 화면으로</button>
+        </div>
+
+        <!-- STEP 2: 수강 희망 정보 (3개 과목) -->
+        <div id="step2" class="step hidden">
+          <p style="margin-bottom: 20px; color: var(--ku-crimson); font-weight: bold; font-size: 0.95rem; text-align: center;">※ 고민 중인 희망 과목 3개를 모두 입력해 주세요.</p>
+          
+          <div class="course-group">
+            <h4 style="margin: 0 0 10px 0; color: #333;">1번 희망 과목</h4>
+            <div class="form-group"><input type="text" id="subject_name_1" required placeholder="과목명 (예: 일반물리학)"></div>
+            <div class="form-group"><input type="text" id="subject_code_1" required placeholder="학수번호 (예: PHYS151)"></div>
+            <div class="form-group" style="margin-bottom: 0;"><input type="number" id="class_section_1" required placeholder="분반 (예: 1)"></div>
+          </div>
+
+          <div class="course-group">
+            <h4 style="margin: 0 0 10px 0; color: #333;">2번 희망 과목</h4>
+            <div class="form-group"><input type="text" id="subject_name_2" required placeholder="과목명"></div>
+            <div class="form-group"><input type="text" id="subject_code_2" required placeholder="학수번호"></div>
+            <div class="form-group" style="margin-bottom: 0;"><input type="number" id="class_section_2" required placeholder="분반"></div>
+          </div>
+
+          <div class="course-group">
+            <h4 style="margin: 0 0 10px 0; color: #333;">3번 희망 과목</h4>
+            <div class="form-group"><input type="text" id="subject_name_3" required placeholder="과목명"></div>
+            <div class="form-group"><input type="text" id="subject_code_3" required placeholder="학수번호"></div>
+            <div class="form-group" style="margin-bottom: 0;"><input type="number" id="class_section_3" required placeholder="분반"></div>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button type="button" id="prevBtn1" class="submit-btn" style="background-color: #555;">이전으로</button>
+            <button type="button" id="nextBtn2" class="submit-btn">다음 화면으로</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: 추가 희망 내용 -->
+        <div id="step3" class="step hidden">
+          <div class="form-group">
+            <label for="expectations">수업에 희망하는 내용이 있나요? (선택)</label>
+            <textarea id="expectations" name="expectations" rows="5" placeholder="예) 실습 위주의 수업이었으면 좋겠습니다." style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 1rem; resize: vertical; font-family: inherit;"></textarea>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <button type="button" id="prevBtn2" class="submit-btn" style="background-color: #555;">이전으로</button>
+            <button type="submit" id="submitBtn" class="submit-btn">제출하기 (AI 분석 시작)</button>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- STEP 4: 결과 및 감사 인사 -->
+      <div id="step4" class="step hidden">
+        <h3 style="color: var(--ku-crimson); text-align: center; font-size: 1.4rem;">제출 완료되었습니다</h3>
+        <div id="resultData" style="text-align: left; margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 8px; font-size: 1rem; line-height: 1.6; border: 1px solid #eee;"></div>
+
+        <!-- AI 로딩 영역 -->
+        <div id="aiLoading" style="text-align: center; margin: 20px 0; font-size: 1.1rem; color: #8B0029; font-weight: bold; display: none;">
+          <br>🤖 지정하신 AI 모델로 분석 중입니다... ⏳<br><br>
+        </div>
+        
+        <!-- AI 분석 결과 출력 영역 -->
+        <div id="aiResult" class="hidden" style="text-align: left; margin: 20px 0; padding: 25px; background: #fff5f7; border-radius: 12px; font-size: 1rem; line-height: 1.7; border: 2px solid #8B0029; color: #222; box-shadow: 0 5px 15px rgba(139, 0, 41, 0.1);">
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+          <p class="notice" style="font-size: 0.95rem; color: #666; margin-bottom: 20px;">
+            입력해주신 데이터는 강좌별 선호도 분석 및 행정적 지원에 소중히 활용됩니다.
+          </p>
+          <strong style="color: var(--ku-crimson); font-size: 1.3rem; display: block; margin-top: 15px;">
+            참여해주셔서 감사합니다!
+          </strong>
+          <!-- 다시 입력하기 버튼 -->
+          <button id="resetBtn" class="submit-btn" style="margin-top: 25px; background-color: #555;">새로운 설문 작성하기</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 우측 하단 설정 버튼 -->
+  <button id="settingsBtn" class="settings-btn">⚙️</button>
+
+  <!-- 설정 모달 (웹 배포용) -->
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-content" style="max-width: 500px;">
+      <h3 style="margin-bottom: 20px; color: var(--ku-crimson);">⚙️ 시스템 상세 설정</h3>
+
+      <div class="form-group" style="text-align: left;">
+        <label style="font-weight: bold;">🔑 Google Gemini API Key</label>
+        <p style="font-size: 0.8rem; color: #666; margin-top: 0; margin-bottom: 5px;">기본 제공 키가 숨겨져 작동 중입니다.</p>
+        <button type="button" id="changeApiBtn" style="padding: 8px 12px; background-color: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">내 API 키로 변경하기</button>
+      </div>
+
+      <div class="form-group" style="text-align: left;">
+        <label for="geminiModel" style="font-weight: bold;">🤖 Gemini 추천 모델 선택</label>
+        <p style="font-size: 0.8rem; color: #666; margin-top: 0; margin-bottom: 5px;">오류 시 다른 모델을 선택해보세요.</p>
+        <select id="geminiModel" style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ddd; font-size: 1rem;">
+          <option value="gemini-1.5-flash">gemini-1.5-flash (최신/빠름/추천)</option>
+          <option value="gemini-1.5-pro">gemini-1.5-pro (최신/고성능)</option>
+          <option value="gemini-pro">gemini-pro (구형 1.0)</option>
+        </select>
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 25px;">
+        <button type="button" id="closeSettingsBtn" class="submit-btn" style="background-color: #555;">닫기</button>
+        <button type="button" id="saveSettingsBtn" class="submit-btn">설정 저장하기</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
